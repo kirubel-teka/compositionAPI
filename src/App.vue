@@ -1,15 +1,22 @@
 <template> 
   <div id="app">
     <div class="scrollPosition"> {{ offset }}</div>
+    <composition></composition>
   </div>
 
 </template>
 
 <script>
 import mixin from '@/mixin';
+import composition from './components/composition.vue';
+
+
 export default {
 name: 'App',
 mixins: [mixin],
+components: {
+  composition,
+}
 }
 
 </script>
