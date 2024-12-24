@@ -8,14 +8,20 @@
             <input type="text" v-model="phrase">
         </p>
         <p>{{ reversedPhrase }}</p>
+
+        <app-alert :user="user"/>
     </div>
 </template>
 
 <script>
 import { ref, reactive, toRefs, watchEffect, computed } from 'vue';
+import AppAlert from "@/components/Alert.vue"
 
 export default {
     name: 'composition',
+    components: {
+        AppAlert,
+    },
     setup() {
         let num = ref(0);
 
@@ -54,6 +60,7 @@ export default {
             phrase,
             reversedPhrase, 
             double,
+            user,
         }
     }
 }
