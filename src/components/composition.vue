@@ -1,13 +1,18 @@
 <template>
     <div class="com_num">
         <p>{{ num }}</p>
+        <p>{{ double }}</p>
         <button type="button" @click.prevent="increment">Click Me</button>
         <p>{{ name }}</p>
+        <p>
+            <input type="text" v-model="phrase">
+        </p>
+        <p>{{ reversedPhrase }}</p>
     </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs } from 'vue';
+import { ref, reactive, toRefs, watchEffect, computed } from 'vue';
 
 export default {
     name: 'composition',
@@ -17,6 +22,10 @@ export default {
         function increment() {
             num.value++;
         }
+
+        const double = computed(() => {
+            return num.value * 2;
+        })
         
         const user = reactive({
             name: 'John',
@@ -27,10 +36,24 @@ export default {
             user.name = 'Chris';
          }, 3000);
 
+         const phrase = ref("");
+         const reversedPhrase = ref("");
+
+
+        watchEffect(() => {
+            reversedPhrase.value = phrase.value.split("").reverse().join("");
+        })
+
+        
+
+
         return {
             num,
             increment,
             ...toRefs(user),
+            phrase,
+            reversedPhrase, 
+            double,
         }
     }
 }
