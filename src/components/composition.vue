@@ -2,11 +2,12 @@
     <div class="com_num">
         <p>{{ num }}</p>
         <button type="button" @click.prevent="increment">Click Me</button>
+        <p>{{ name }}</p>
     </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, reactive, toRefs } from 'vue';
 
 export default {
     name: 'composition',
@@ -16,10 +17,20 @@ export default {
         function increment() {
             num.value++;
         }
+        
+        const user = reactive({
+            name: 'John',
+            age: 20,
+        });
+
+         setTimeout(() =>{
+            user.name = 'Chris';
+         }, 3000);
 
         return {
             num,
             increment,
+            ...toRefs(user),
         }
     }
 }
