@@ -10,11 +10,12 @@
         <p>{{ reversedPhrase }}</p>
 
         <app-alert :user="user"/>
+        <button type="button" ref="btn">Button</button>
     </div>
 </template>
 
 <script>
-import { ref, reactive, toRefs, watchEffect, computed } from 'vue';
+import { ref, reactive, toRefs, watchEffect, computed, onMounted } from 'vue';
 import AppAlert from "@/components/Alert.vue"
 
 export default {
@@ -23,7 +24,15 @@ export default {
         AppAlert,
     },
     setup() {
-        let num = ref(0);
+        const btn = ref(null);
+
+        onMounted(() => {
+            btn.value.addEventListener("click", () => {
+                console.log("Button clicked");
+            })
+        })
+
+        let num = ref(0);     
 
         function increment() {
             num.value++;
@@ -61,6 +70,7 @@ export default {
             reversedPhrase, 
             double,
             user,
+            btn,
         }
     }
 }
