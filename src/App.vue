@@ -1,9 +1,13 @@
 <template> 
   <div id="app">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about/admin">About</router-link>
+    <router-view />
     <div class="scrollPosition"> {{ offset }}</div>
     <composition></composition>
+   
   </div>
-
+ 
 </template>
 
 <script>
